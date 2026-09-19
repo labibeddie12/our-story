@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141019;
+    --plum:#201826;
+    --veil:#2B2133;
+    --paper:#F4EFE8;
+    --muted:#A79BB0;
+    --brass:#C89B3C;
+    --rose:#E0A3A8;
+
+    --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --sans:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit}
+
+  html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  /* one quiet light source, not a decoration parade */
+  .glow{
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(60vw 60vw at 50% -10%, rgba(200,155,60,.16), transparent 62%),
+      radial-gradient(48vw 48vw at 88% 22%, rgba(224,163,168,.10), transparent 60%);
+  }
+
+  main{position:relative;z-index:1;max-width:66rem;margin:0 auto;padding:0 1.5rem}
+
+  /* ---------- hero ---------- */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:6rem 0 4rem;text-align:center}
+
+  .names{font-family:var(--serif);font-weight:300;letter-spacing:.01em;margin:0;line-height:1.04}
+  .names .n{display:block;font-size:clamp(2.6rem,10vw,5.25rem)}
+  .names .amp{
+    display:block;font-style:italic;color:var(--brass);
+    font-size:clamp(1.5rem,5vw,2.5rem);
+    margin:.15em 0;opacity:.9;
+  }
+
+  .met{margin:2.25rem auto 0;font-size:.9rem;letter-spacing:.06em;color:var(--muted);max-width:32ch}
+  .met b{color:var(--paper);font-weight:400}
+
+  .rule{width:1px;height:3.5rem;margin:2.5rem auto 2rem;background:linear-gradient(var(--brass),transparent)}
+
+  .bignum{font-family:var(--serif);font-weight:300;line-height:.9;font-size:clamp(4.5rem,19vw,10rem);font-variant-numeric:tabular-nums;color:var(--paper)}
+  .bigword{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,3.5vw,1.6rem);color:var(--rose);margin-top:.35rem}
+
+  .units{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem 1rem;
+    margin:3.25rem auto 0;max-width:38rem;
+  }
+  .unit{text-align:center}
+  .unit .v{font-family:var(--serif);font-size:clamp(1.6rem,6vw,2.4rem);font-variant-numeric:tabular-nums;line-height:1}
+  .unit .k{font-size:.72rem;letter-spacing:.14em;color:var(--muted);margin-top:.45rem}
+
+  /* ---------- sections ---------- */
+  section{padding:5.5rem 0;border-top:1px solid rgba(244,239,232,.08)}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,5vw,2.6rem);margin:0 0 .4rem;line-height:1.15}
+  .lede{color:var(--muted);margin:0 0 2.5rem;max-width:52ch;font-size:.95rem}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:2.5rem 2rem}
+  .stat .v{font-family:var(--serif);font-size:clamp(2rem,6vw,2.8rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--brass)}
+  .stat .k{margin-top:.5rem;font-size:.9rem;color:var(--muted);max-width:24ch}
+
+  /* timeline: content really is a sequence, so it gets a spine */
+  .timeline{list-style:none;margin:0;padding:0 0 0 1.6rem;border-left:1px solid rgba(200,155,60,.3)}
+  .timeline li{position:relative;padding:0 0 2.25rem}
+  .timeline li:last-child{padding-bottom:0}
+  .timeline li::before{
+    content:"";position:absolute;left:calc(-1.6rem - 4px);top:.6rem;
+    width:7px;height:7px;border-radius:50%;background:var(--brass);
+  }
+  .tl-date{font-size:.78rem;letter-spacing:.1em;color:var(--muted)}
+  .tl-title{font-family:var(--serif);font-size:1.45rem;margin:.1rem 0 .15rem}
+  .tl-ago{font-size:.88rem;color:var(--rose)}
+
+  .next{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:2rem}
+  .next-card{background:linear-gradient(var(--plum),var(--veil));border-radius:2px;padding:2rem 1.75rem}
+  .next-card .v{font-family:var(--serif);font-size:clamp(2.4rem,7vw,3.4rem);line-height:1;font-variant-numeric:tabular-nums}
+  .next-card .k{color:var(--muted);font-size:.9rem;margin-top:.6rem}
+  .next-card .d{color:var(--rose);font-size:.85rem;margin-top:.15rem}
+
+  .letter{font-family:var(--serif);font-size:clamp(1.2rem,3.6vw,1.65rem);line-height:1.6;max-width:34ch;margin:0;font-weight:300}
+  .sign{font-family:var(--serif);font-style:italic;color:var(--brass);margin-top:1.75rem;font-size:1.2rem}
+
+  footer{padding:4rem 0 5rem;text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:.06em;border-top:1px solid rgba(244,239,232,.08)}
+
+  /* one page-load reveal, then nothing moves except the clock */
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.3,1) forwards}
+  .reveal:nth-child(2){animation-delay:.12s}
+  .reveal:nth-child(3){animation-delay:.22s}
+  .reveal:nth-child(4){animation-delay:.32s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  a{color:var(--brass)}
+  :focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+  @media (prefers-reduced-motion:reduce){
+    .reveal{animation:none;opacity:1;transform:none}
+  }
+  @media (max-width:520px){
+    .units{grid-template-columns:repeat(3,1fr);gap:1.4rem .5rem}
+    section{padding:4rem 0}
+  }
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+
+<main>
+
+  <!-- ===== hero ===== -->
+  <header class="hero">
+    <h1 class="names reveal">
+      <span class="n" id="name-a">Your name</span>
+      <span class="amp">and</span>
+      <span class="n" id="name-b">Her name</span>
+    </h1>
+
+    <p class="met reveal">The day we met was <b id="met-date">1 January 2024</b>, and it has not stopped counting since.</p>
+
+    <div class="rule reveal" aria-hidden="true"></div>
+
+    <div class="reveal">
+      <div class="bignum" id="total-days">0</div>
+      <div class="bigword">days together</div>
+    </div>
+
+    <div class="units" id="units" aria-live="off">
+      <div class="unit"><div class="v" id="u-y">0</div><div class="k">years</div></div>
+      <div class="unit"><div class="v" id="u-mo">0</div><div class="k">months</div></div>
+      <div class="unit"><div class="v" id="u-d">0</div><div class="k">days</div></div>
+      <div class="unit"><div class="v" id="u-h">0</div><div class="k">hours</div></div>
+      <div class="unit"><div class="v" id="u-mi">0</div><div class="k">minutes</div></div>
+      <div class="unit"><div class="v" id="u-s">0</div><div class="k">seconds</div></div>
+    </div>
+  </header>
+
+  <!-- ===== stats ===== -->
+  <section>
+    <h2>The same time, counted differently</h2>
+    <p class="lede">Every way I can think of to measure how long you have been here.</p>
+    <div class="stats">
+      <div class="stat"><div class="v" id="s-hours">0</div><div class="k">hours</div></div>
+      <div class="stat"><div class="v" id="s-mins">0</div><div class="k">minutes</div></div>
+      <div class="stat"><div class="v" id="s-moons">0</div><div class="k">full moons have come and gone</div></div>
+      <div class="stat"><div class="v" id="s-orbits">0</div><div class="k">trips around the sun, side by side</div></div>
+    </div>
+  </section>
+
+  <!-- ===== timeline ===== -->
+  <section>
+    <h2>Days worth marking</h2>
+    <p class="lede">The dates I keep going back to.</p>
+    <ul class="timeline" id="timeline"></ul>
+  </section>
+
+  <!-- ===== upcoming ===== -->
+  <section>
+    <h2>Still to come</h2>
+    <p class="lede">What we are counting down to next.</p>
+    <div class="next">
+      <div class="next-card">
+        <div class="v" id="next-month-v">0</div>
+        <div class="k">days until our next monthly anniversary</div>
+        <div class="d" id="next-month-d"></div>
+      </div>
+      <div class="next-card">
+        <div class="v" id="next-year-v">0</div>
+        <div class="k">days until our next anniversary</div>
+        <div class="d" id="next-year-d"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== note ===== -->
+  <section>
+    <h2>A note</h2>
+    <p class="letter" id="note">Write whatever you want her to read here. Keep it short. The short ones get reread.</p>
+    <p class="sign" id="sign">— Your name</p>
+  </section>
+
+  <footer>Made for you, and kept running for as long as the page is open.</footer>
+</main>
+
+<script>
+/* =========================================================
+   EDIT EVERYTHING IN THIS BLOCK. Nothing below it needs changing.
+   ========================================================= */
+const CONFIG = {
+  nameA: "Your name",
+  nameB: "Her name",
+
+  // The day you met: year, month (1-12), day, hour (0-23), minute
+  met: { year: 2024, month: 1, day: 1, hour: 18, minute: 30 },
+
+  note: "Write whatever you want her to read here. Keep it short. The short ones get reread.",
+  signature: "Your name",
+
+  // Add, remove or reorder freely.
+  milestones: [
+    { date: "2024-01-01", title: "The day we met" },
+    { date: "2024-02-14", title: "Our first date" },
+    { date: "2024-06-20", title: "The trip we still talk about" }
+  ]
+};
+/* ======================= end of edits ======================= */
+
+const MET = new Date(
+  CONFIG.met.year, CONFIG.met.month - 1, CONFIG.met.day,
+  CONFIG.met.hour || 0, CONFIG.met.minute || 0, 0
+);
+
+const MONTHS = ["January","February","March","April","May","June",
+                "July","August","September","October","November","December"];
+
+const fmt = n => n.toLocaleString("en-IN");
+const longDate = d => `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+const daysInMonth = (y, m) => new Date(y, m + 1, 0).getDate();
+const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const dayGap = (a, b) => Math.round((startOfDay(b) - startOfDay(a)) / 86400000);
+
+/* exact years / months / days / h / m / s between two dates */
+function breakdown(from, to) {
+  let y = to.getFullYear() - from.getFullYear();
+  let mo = to.getMonth() - from.getMonth();
+  let d = to.getDate() - from.getDate();
+  let h = to.getHours() - from.getHours();
+  let mi = to.getMinutes() - from.getMinutes();
+  let s = to.getSeconds() - from.getSeconds();
+
+  if (s < 0) { s += 60; mi--; }
+  if (mi < 0) { mi += 60; h--; }
+  if (h < 0) { h += 24; d--; }
+  if (d < 0) {
+    const prevMonth = to.getMonth() - 1;
+    d += daysInMonth(to.getFullYear(), prevMonth);
+    mo--;
+  }
+  if (mo < 0) { mo += 12; y--; }
+  return { y, mo, d, h, mi, s };
+}
+
+function nextMonthly(from, now) {
+  let c = new Date(now.getFullYear(), now.getMonth(), Math.min(from.getDate(), daysInMonth(now.getFullYear(), now.getMonth())));
+  if (dayGap(now, c) <= 0) {
+    const m = now.getMonth() + 1;
+    c = new Date(now.getFullYear(), m, Math.min(from.getDate(), daysInMonth(now.getFullYear(), m)));
+  }
+  return c;
+}
+
+function nextYearly(from, now) {
+  let c = new Date(now.getFullYear(), from.getMonth(), from.getDate());
+  if (dayGap(now, c) <= 0) c = new Date(now.getFullYear() + 1, from.getMonth(), from.getDate());
+  return c;
+}
+
+function set(id, value) {
+  const el = document.getElementById(id);
+  if (el && el.textContent !== String(value)) el.textContent = value;
+}
+
+function tick() {
+  const now = new Date();
+  const ms = now - MET;
+  const b = breakdown(MET, now);
+
+  set("total-days", fmt(Math.floor(ms / 86400000)));
+  set("u-y", b.y); set("u-mo", b.mo); set("u-d", b.d);
+  set("u-h", b.h); set("u-mi", b.mi); set("u-s", b.s);
+
+  set("s-hours", fmt(Math.floor(ms / 3600000)));
+  set("s-mins", fmt(Math.floor(ms / 60000)));
+  set("s-moons", Math.floor(ms / 86400000 / 29.530588853));
+  set("s-orbits", (ms / 86400000 / 365.2425).toFixed(2));
+
+  const nm = nextMonthly(MET, now), ny = nextYearly(MET, now);
+  set("next-month-v", dayGap(now, nm));
+  set("next-month-d", longDate(nm));
+  set("next-year-v", dayGap(now, ny));
+  set("next-year-d", `${longDate(ny)} · year ${ny.getFullYear() - MET.getFullYear()}`);
+}
+
+function build() {
+  document.getElementById("name-a").textContent = CONFIG.nameA;
+  document.getElementById("name-b").textContent = CONFIG.nameB;
+  document.getElementById("met-date").textContent = longDate(MET);
+  document.getElementById("note").textContent = CONFIG.note;
+  document.getElementById("sign").textContent = "— " + CONFIG.signature;
+  document.title = `${CONFIG.nameA} and ${CONFIG.nameB}`;
+
+  const now = new Date();
+  const list = document.getElementById("timeline");
+  list.innerHTML = "";
+
+  CONFIG.milestones
+    .map(m => ({ ...m, d: new Date(m.date + "T12:00:00") }))
+    .sort((a, b) => a.d - b.d)
+    .forEach(m => {
+      const gap = dayGap(now, m.d);
+      const ago = gap > 0 ? `in ${fmt(gap)} days`
+                : gap === 0 ? "today"
+                : `${fmt(-gap)} days ago`;
+      const li = document.createElement("li");
+      li.innerHTML =
+        `<div class="tl-date">${longDate(m.d)}</div>` +
+        `<div class="tl-title"></div>` +
+        `<div class="tl-ago">${ago}</div>`;
+      li.querySelector(".tl-title").textContent = m.title;
+      list.appendChild(li);
+    });
+}
+
+build();
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
