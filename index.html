@@ -204,7 +204,7 @@
   <section>
     <h2>Still to come</h2>
     <p class="lede">What we are counting down to next.</p>
-    <div class="next">
+    <div class="next" id="next">
       <div class="next-card">
         <div class="v" id="next-month-v">0</div>
         <div class="k">days until our next monthly anniversary</div>
@@ -265,9 +265,16 @@ const CONFIG = {
   note: "I did not know what I was walking into on the eleventh of September. I am glad I kept walking.",
   signature: "Labib",
 
+  // Birthdays get their own countdown card.
+  // Add yours the same way: { who: "Labib", date: "YYYY-MM-DD" }
+  birthdays: [
+    { who: "Misty", date: "2005-04-09" }
+  ],
+
   // Add, remove or reorder freely. Format: YYYY-MM-DD
   milestones: [
-    { date: "2024-09-11", title: "The day we met" }
+    { date: "2024-09-11", title: "The day we met" },
+    { date: "2026-02-07", title: "Our first date" }
   ]
 };
 /* ======================= end of edits ======================= */
@@ -343,6 +350,16 @@ function tick() {
   set("next-month-d", longDate(nm));
   set("next-year-v", dayGap(now, ny));
   set("next-year-d", `${longDate(ny)} · year ${ny.getFullYear() - MET.getFullYear()}`);
+
+  (CONFIG.birthdays || []).forEach((b, i) => {
+    const born = new Date(b.date + "T12:00:00");
+    let nb = new Date(now.getFullYear(), born.getMonth(), born.getDate());
+    if (dayGap(now, nb) < 0) nb = new Date(now.getFullYear() + 1, born.getMonth(), born.getDate());
+    const gap = dayGap(now, nb);
+    const age = nb.getFullYear() - born.getFullYear();
+    set(`bd-${i}-v`, gap);
+    set(`bd-${i}-d`, gap === 0 ? `Today · turning ${age}` : `${longDate(nb)} · turning ${age}`);
+  });
 }
 
 function build() {
@@ -375,6 +392,18 @@ function build() {
     card.querySelector(".wn").textContent = s.window;
     card.querySelector(".tr").textContent = s.trait;
     signs.appendChild(card);
+  });
+
+  const nextEl = document.getElementById("next");
+  (CONFIG.birthdays || []).forEach((b, i) => {
+    const card = document.createElement("div");
+    card.className = "next-card";
+    card.innerHTML =
+      `<div class="v" id="bd-${i}-v">0</div>` +
+      `<div class="k"></div>` +
+      `<div class="d" id="bd-${i}-d"></div>`;
+    card.querySelector(".k").textContent = `days until ${b.who}'s birthday`;
+    nextEl.appendChild(card);
   });
 
   const now = new Date();
