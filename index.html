@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Us</title>
+<title>Labib and Misty</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
@@ -37,7 +37,6 @@
     overflow-x:hidden;
   }
 
-  /* one quiet light source, not a decoration parade */
   .glow{
     position:fixed;inset:0;pointer-events:none;z-index:0;
     background:
@@ -83,6 +82,26 @@
   .stat .v{font-family:var(--serif);font-size:clamp(2rem,6vw,2.8rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--brass)}
   .stat .k{margin-top:.5rem;font-size:.9rem;color:var(--muted);max-width:24ch}
 
+  /* ---------- zodiac ---------- */
+  .signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.5rem}
+  .sign-card{
+    background:linear-gradient(var(--plum),var(--veil));
+    border-radius:2px;padding:2.25rem 1.75rem;position:relative;overflow:hidden;
+  }
+  .sign-card .glyph{
+    font-family:var(--serif);font-size:4.5rem;line-height:1;color:var(--brass);opacity:.85;
+    display:block;margin-bottom:.75rem;
+  }
+  .sign-card .who{font-family:var(--serif);font-size:1.8rem;line-height:1.1}
+  .sign-card .what{color:var(--rose);font-size:.95rem;margin-top:.2rem}
+  .sign-card dl{margin:1.5rem 0 0;font-size:.88rem;display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.25rem}
+  .sign-card dt{color:var(--muted)}
+  .sign-card dd{margin:0}
+  .pairing{
+    font-family:var(--serif);font-size:clamp(1.15rem,3.4vw,1.5rem);line-height:1.5;
+    margin:2.25rem 0 0;max-width:40ch;color:var(--paper);font-weight:300;
+  }
+
   /* timeline: content really is a sequence, so it gets a spine */
   .timeline{list-style:none;margin:0;padding:0 0 0 1.6rem;border-left:1px solid rgba(200,155,60,.3)}
   .timeline li{position:relative;padding:0 0 2.25rem}
@@ -106,7 +125,6 @@
 
   footer{padding:4rem 0 5rem;text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:.06em;border-top:1px solid rgba(244,239,232,.08)}
 
-  /* one page-load reveal, then nothing moves except the clock */
   .reveal{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.3,1) forwards}
   .reveal:nth-child(2){animation-delay:.12s}
   .reveal:nth-child(3){animation-delay:.22s}
@@ -116,9 +134,7 @@
   a{color:var(--brass)}
   :focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 
-  @media (prefers-reduced-motion:reduce){
-    .reveal{animation:none;opacity:1;transform:none}
-  }
+  @media (prefers-reduced-motion:reduce){ .reveal{animation:none;opacity:1;transform:none} }
   @media (max-width:520px){
     .units{grid-template-columns:repeat(3,1fr);gap:1.4rem .5rem}
     section{padding:4rem 0}
@@ -133,12 +149,12 @@
   <!-- ===== hero ===== -->
   <header class="hero">
     <h1 class="names reveal">
-      <span class="n" id="name-a">Your name</span>
+      <span class="n" id="name-a">Labib</span>
       <span class="amp">and</span>
-      <span class="n" id="name-b">Her name</span>
+      <span class="n" id="name-b">Misty</span>
     </h1>
 
-    <p class="met reveal">The day we met was <b id="met-date">1 January 2024</b>, and it has not stopped counting since.</p>
+    <p class="met reveal">The day we met was <b id="met-date">11 September 2024</b>, and it has not stopped counting since.</p>
 
     <div class="rule reveal" aria-hidden="true"></div>
 
@@ -147,7 +163,7 @@
       <div class="bigword">days together</div>
     </div>
 
-    <div class="units" id="units" aria-live="off">
+    <div class="units" id="units">
       <div class="unit"><div class="v" id="u-y">0</div><div class="k">years</div></div>
       <div class="unit"><div class="v" id="u-mo">0</div><div class="k">months</div></div>
       <div class="unit"><div class="v" id="u-d">0</div><div class="k">days</div></div>
@@ -167,6 +183,14 @@
       <div class="stat"><div class="v" id="s-moons">0</div><div class="k">full moons have come and gone</div></div>
       <div class="stat"><div class="v" id="s-orbits">0</div><div class="k">trips around the sun, side by side</div></div>
     </div>
+  </section>
+
+  <!-- ===== zodiac ===== -->
+  <section>
+    <h2>An earth sign and a fire sign</h2>
+    <p class="lede">Nobody warned either of us.</p>
+    <div class="signs" id="signs"></div>
+    <p class="pairing" id="pairing"></p>
   </section>
 
   <!-- ===== timeline ===== -->
@@ -197,11 +221,11 @@
   <!-- ===== note ===== -->
   <section>
     <h2>A note</h2>
-    <p class="letter" id="note">Write whatever you want her to read here. Keep it short. The short ones get reread.</p>
-    <p class="sign" id="sign">— Your name</p>
+    <p class="letter" id="note"></p>
+    <p class="sign" id="sign"></p>
   </section>
 
-  <footer>Made for you, and kept running for as long as the page is open.</footer>
+  <footer>For Misty, and kept running for as long as this page is open.</footer>
 </main>
 
 <script>
@@ -209,20 +233,41 @@
    EDIT EVERYTHING IN THIS BLOCK. Nothing below it needs changing.
    ========================================================= */
 const CONFIG = {
-  nameA: "Your name",
-  nameB: "Her name",
+  nameA: "Labib",
+  nameB: "Misty",
 
   // The day you met: year, month (1-12), day, hour (0-23), minute
-  met: { year: 2024, month: 1, day: 1, hour: 18, minute: 30 },
+  met: { year: 2024, month: 9, day: 11, hour: 0, minute: 0 },
 
-  note: "Write whatever you want her to read here. Keep it short. The short ones get reread.",
-  signature: "Your name",
+  signs: [
+    {
+      who: "Labib",
+      sign: "Virgo",
+      glyph: "\u264D",
+      element: "Earth",
+      planet: "Mercury",
+      window: "23 Aug – 22 Sep",
+      trait: "Notices everything, says half of it"
+    },
+    {
+      who: "Misty",
+      sign: "Aries",
+      glyph: "\u2648",
+      element: "Fire",
+      planet: "Mars",
+      window: "21 Mar – 19 Apr",
+      trait: "Decides first, explains later"
+    }
+  ],
 
-  // Add, remove or reorder freely.
+  pairing: "Virgo plans the whole trip down to the last stop. Aries is already sitting in the car with the engine running. Somehow we keep arriving at the same place.",
+
+  note: "I did not know what I was walking into on the eleventh of September. I am glad I kept walking.",
+  signature: "Labib",
+
+  // Add, remove or reorder freely. Format: YYYY-MM-DD
   milestones: [
-    { date: "2024-01-01", title: "The day we met" },
-    { date: "2024-02-14", title: "Our first date" },
-    { date: "2024-06-20", title: "The trip we still talk about" }
+    { date: "2024-09-11", title: "The day we met" }
   ]
 };
 /* ======================= end of edits ======================= */
@@ -241,7 +286,6 @@ const daysInMonth = (y, m) => new Date(y, m + 1, 0).getDate();
 const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 const dayGap = (a, b) => Math.round((startOfDay(b) - startOfDay(a)) / 86400000);
 
-/* exact years / months / days / h / m / s between two dates */
 function breakdown(from, to) {
   let y = to.getFullYear() - from.getFullYear();
   let mo = to.getMonth() - from.getMonth();
@@ -253,20 +297,18 @@ function breakdown(from, to) {
   if (s < 0) { s += 60; mi--; }
   if (mi < 0) { mi += 60; h--; }
   if (h < 0) { h += 24; d--; }
-  if (d < 0) {
-    const prevMonth = to.getMonth() - 1;
-    d += daysInMonth(to.getFullYear(), prevMonth);
-    mo--;
-  }
+  if (d < 0) { d += daysInMonth(to.getFullYear(), to.getMonth() - 1); mo--; }
   if (mo < 0) { mo += 12; y--; }
   return { y, mo, d, h, mi, s };
 }
 
 function nextMonthly(from, now) {
-  let c = new Date(now.getFullYear(), now.getMonth(), Math.min(from.getDate(), daysInMonth(now.getFullYear(), now.getMonth())));
+  let c = new Date(now.getFullYear(), now.getMonth(),
+        Math.min(from.getDate(), daysInMonth(now.getFullYear(), now.getMonth())));
   if (dayGap(now, c) <= 0) {
     const m = now.getMonth() + 1;
-    c = new Date(now.getFullYear(), m, Math.min(from.getDate(), daysInMonth(now.getFullYear(), m)));
+    c = new Date(now.getFullYear(), m,
+        Math.min(from.getDate(), daysInMonth(now.getFullYear(), m)));
   }
   return c;
 }
@@ -309,7 +351,31 @@ function build() {
   document.getElementById("met-date").textContent = longDate(MET);
   document.getElementById("note").textContent = CONFIG.note;
   document.getElementById("sign").textContent = "— " + CONFIG.signature;
+  document.getElementById("pairing").textContent = CONFIG.pairing;
   document.title = `${CONFIG.nameA} and ${CONFIG.nameB}`;
+
+  const signs = document.getElementById("signs");
+  signs.innerHTML = "";
+  CONFIG.signs.forEach(s => {
+    const card = document.createElement("div");
+    card.className = "sign-card";
+    card.innerHTML =
+      `<span class="glyph" aria-hidden="true"></span>` +
+      `<div class="who"></div>` +
+      `<div class="what"></div>` +
+      `<dl><dt>Element</dt><dd class="el"></dd>` +
+      `<dt>Ruler</dt><dd class="pl"></dd>` +
+      `<dt>Season</dt><dd class="wn"></dd>` +
+      `<dt>In short</dt><dd class="tr"></dd></dl>`;
+    card.querySelector(".glyph").textContent = s.glyph;
+    card.querySelector(".who").textContent = s.who;
+    card.querySelector(".what").textContent = s.sign;
+    card.querySelector(".el").textContent = s.element;
+    card.querySelector(".pl").textContent = s.planet;
+    card.querySelector(".wn").textContent = s.window;
+    card.querySelector(".tr").textContent = s.trait;
+    signs.appendChild(card);
+  });
 
   const now = new Date();
   const list = document.getElementById("timeline");
